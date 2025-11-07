@@ -1,4 +1,4 @@
-# 🎓 AI Research Skills Library
+# AI Research Skills Library
 
 > **The most comprehensive open-source library of AI research skills for AI models**
 
@@ -6,24 +6,28 @@
 [![Skills](https://img.shields.io/badge/Skills-7-blue.svg)](.)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-Empower AI models (Claude, GPT, Gemini, and others) with deep expertise across the entire AI research lifecycle—from model architecture to production deployment. Each skill provides comprehensive documentation, real-world examples, and battle-tested best practices.
+## Our Mission
 
-**Works with**: Any AI assistant that supports skills or knowledge injection.
+**Enable AI agents to autonomously conduct AI research**—from hypothesis to experimental verification. We provide the foundational skills that empower **AI research agents** to conduct experiments, including preparing datasets, executing training pipelines, deploying models, and validating scientific hypotheses.
 
----
+ 
 
-## 🌟 Why This Project?
+<p align="center">
+  <img src="docs/skills.png" alt="AI Research Agent System" width="50%">
+</p>
+  
 
-**Problem**: AI researchers juggle 100+ frameworks, libraries, and tools. Documentation is scattered. Best practices are tribal knowledge.
+## Path Towards AI Research Agent
 
-**Solution**: Curated, comprehensive skills that make any AI model your expert research assistant.
+**Problem**: Conducting AI research requires mastering 100+ frameworks and tools. Experimentation is slow, error-prone, and requires deep expertise in each component of the stack.
 
-**Impact**: 
-- ⚡ **10x faster prototyping** - Skip docs hunting, get straight to coding
-- 🎯 **Production-ready patterns** - Learn from real GitHub issues & releases
-- 🤝 **Community-driven** - Open-source knowledge base that grows with the field
+**Solution**: Provide AI agents with comprehensive, battle-tested skills for every stage of AI research—enabling autonomous hypothesis testing through systematic experimentation.
 
----
+**Impact**:
+- 🔬 **Hypothesis-Driven Research** - Agents design and execute experiments to test scientific ideas
+- ⚡ **Automated Experimentation** - From data processing to model deployment without manual intervention
+- 🎯 **Production-Ready Workflows** - Real-world patterns from GitHub issues and release notes
+- 🤝 **Reproducible Science** - Standardized, documented experimentation protocols
 
 ## 📚 Available Skills (7/70 roadmap)
 
@@ -42,15 +46,13 @@ Empower AI models (Claude, GPT, Gemini, and others) with deep expertise across t
 - **[DeepSpeed](08-distributed-training/deepspeed/)** - Microsoft's ZeRO optimization (132 lines)
 - **[PyTorch FSDP](08-distributed-training/pytorch-fsdp/)** - Fully Sharded Data Parallel (119 lines)
 
----
-
 ## 🚀 Quick Start
 
 ### For AI Users
 
 1. **Clone this repository**:
 ```bash
-git clone https://github.com/YOUR_USERNAME/claude-ai-research-skills.git
+git clone https://github.com/zechenzhangAGI/claude-ai-research-skills.git
 cd claude-ai-research-skills
 ```
 
@@ -71,8 +73,6 @@ cd claude-ai-research-skills
 2. **Use [SKILL_TEMPLATE.md](SKILL_TEMPLATE.md)** - Copy-paste scaffold
 3. **Run validation**: `python scripts/validate_skill.py your-skill/`
 4. **Submit PR** - We review within 48 hours
-
----
 
 ## 📖 Skill Structure
 
@@ -105,85 +105,18 @@ skill-name/
 - ✅ Version history & breaking changes
 - ✅ Links to official docs
 
----
-
 ## 🗺️ Roadmap
 
-### ✅ Phase 1: Training Foundation (COMPLETE - 15 skills)
-**Status**: 70% of training lifecycle covered
+We're building towards 70 comprehensive skills across the full AI research lifecycle. See our [detailed roadmap](ROADMAP.md) for the complete development plan.
 
-### 🚧 Phase 2: Complete Training Stack (Weeks 1-2) - 5 Skills
-**Priority**: HIGH - Finish what we started
+**Current Progress**: 7 high-quality skills | **Target**: 70 skills by month 6
 
-- [ ] **OpenRLHF** - Open-source RLHF implementation
-- [ ] **VERL** - VolcEngine RL for LLMs  
-- [ ] **Flash Attention** - Tri Dao's kernel optimization
-- [ ] **bitsandbytes** - 8-bit training/inference
-- [ ] **RWKV** - State-space model alternative
+**Priority Areas**:
+- 🎯 **Inference & Serving** (CRITICAL) - vLLM, TensorRT-LLM, llama.cpp
+- 🤖 **Applications** (CRITICAL) - LangChain, RAG, agents
+- 🚧 **Training Stack** (HIGH) - Complete RLHF, quantization, optimization
 
-### 🎯 Phase 3: Inference & Serving (Weeks 3-4) - 6 Skills
-**Priority**: CRITICAL - Enable production deployment
-
-- [ ] **vLLM** - PagedAttention, continuous batching
-- [ ] **TensorRT-LLM** - NVIDIA inference optimization
-- [ ] **llama.cpp** - CPU/edge inference
-- [ ] **SGLang** - Fast structured generation
-- [ ] **GPTQ** - Post-training quantization
-- [ ] **AWQ** - Activation-aware quantization
-
-### 📊 Phase 4: Evaluation & Data (Weeks 5-6) - 5 Skills
-**Priority**: HIGH - Complete research lifecycle
-
-- [ ] **lm-evaluation-harness** - EleutherAI benchmarks
-- [ ] **HELM** - Stanford evaluation
-- [ ] **AlpacaEval** - Instruction-following eval
-- [ ] **Ray Data** - Distributed data processing
-- [ ] **HuggingFace Datasets** - Dataset management
-
-### 📈 Phase 5: MLOps (Weeks 7-8) - 4 Skills
-**Priority**: MEDIUM-HIGH - Production readiness
-
-- [ ] **Weights & Biases** - Experiment tracking
-- [ ] **MLflow** - Open-source MLOps
-- [ ] **TensorBoard** - Visualization
-- [ ] **HuggingFace Hub** - Model registry
-
-### 🤖 Phase 6: Applications (Weeks 9-12) - 12 Skills
-**Priority**: CRITICAL - Enable AI applications
-
-**Agents**:
-- [ ] **LangChain** - Most popular agent framework
-- [ ] **LlamaIndex** - Data-focused agents
-- [ ] **CrewAI** - Multi-agent collaboration
-- [ ] **AutoGPT** - Autonomous agents
-
-**RAG**:
-- [ ] **Pinecone** - Vector database
-- [ ] **ChromaDB** - Open-source vector DB
-- [ ] **LlamaIndex RAG** - RAG pipelines
-- [ ] **Sentence Transformers** - Embeddings
-
-**Tools**:
-- [ ] **DSPy** - Prompt optimization
-- [ ] **Instructor** - Structured output
-- [ ] **LangSmith** - Observability
-- [ ] **Guardrails AI** - Output validation
-
-### 🔬 Phase 7: Specialized (Weeks 13-16) - 8 Skills
-**Priority**: MEDIUM - Cutting-edge techniques
-
-- [ ] **LLaVA** - Vision-language models
-- [ ] **Whisper** - Speech-to-text
-- [ ] **Stable Diffusion** - Image generation
-- [ ] **MoE Training** - Mixture of Experts
-- [ ] **Model Merging** - mergekit
-- [ ] **Long Context** - RoPE extensions
-- [ ] **Speculative Decoding**
-- [ ] **Distillation**
-
-**Target**: 70 comprehensive skills by month 6
-
----
+[View Full Roadmap →](ROADMAP.md)
 
 ## 🤝 Contributing
 
@@ -200,7 +133,7 @@ We welcome contributions from the AI research community!
 
 ```bash
 # 1. Fork & clone
-git clone https://github.com/YOUR_USERNAME/claude-ai-research-skills.git
+git clone https://github.com/zechenzhangAGI/claude-ai-research-skills.git
 
 # 2. Create skill from template
 cp SKILL_TEMPLATE.md 12-inference-serving/vllm/SKILL.md
@@ -220,8 +153,6 @@ git push origin add-vllm-skill
 
 **Recognition**: All contributors are featured in our [Contributors Hall of Fame](CONTRIBUTORS.md) 🌟
 
----
-
 ## 📊 Project Stats
 
 | Metric | Current | Target (6 months) |
@@ -233,8 +164,6 @@ git push origin add-vllm-skill
 | **Coverage** | Fine-tuning (strong) | Full Lifecycle |
 
 **Philosophy**: Quality > Quantity. Each skill must provide real value with comprehensive guidance, not just links to docs.
-
----
 
 ## 🏗️ Repository Structure
 
@@ -267,8 +196,6 @@ claude-ai-research-skills/
 └── 19-emerging-techniques/      (planned)
 ```
 
----
-
 ## 🎯 Use Cases
 
 ### For Researchers
@@ -287,15 +214,11 @@ claude-ai-research-skills/
 "We need to scale training to 100 GPUs"
 → **08-distributed-training/deepspeed/** - ZeRO stages, 3D parallelism
 
----
-
 ## 📄 License
 
 MIT License - See [LICENSE](LICENSE) for details.
 
 **Note**: Individual skills may reference libraries with different licenses. Please check each project's license before use.
-
----
 
 ## 🙏 Acknowledgments
 
@@ -308,16 +231,12 @@ Special thanks to:
 - EleutherAI, HuggingFace, NVIDIA, Lightning AI, Meta AI, Anthropic
 - All researchers who maintain excellent documentation
 
----
-
 ## 📞 Get Involved
 
-- **🐛 Issues**: [Report bugs or request skills](https://github.com/YOUR_USERNAME/claude-ai-research-skills/issues)
-- **💬 Discussions**: [Ask questions & share ideas](https://github.com/YOUR_USERNAME/claude-ai-research-skills/discussions)
+- **🐛 Issues**: [Report bugs or request skills](https://github.com/zechenzhangAGI/claude-ai-research-skills/issues)
+- **💬 Discussions**: [Ask questions & share ideas](https://github.com/zechenzhangAGI/claude-ai-research-skills/discussions)
 - **🌟 Star**: Help others discover this project
 - **🔀 Fork**: Build your own skill collection
-
----
 
 ## 📈 Recent Updates
 
@@ -330,13 +249,11 @@ Special thanks to:
 **October 2025** - v0.1.0
 - 🎉 Initial release with 5 fine-tuning skills
 
----
-
 <p align="center">
   <strong>Help us build the definitive AI research skill library</strong><br>
   <a href="CONTRIBUTING.md">Contribute</a> •
-  <a href="PROJECT_ANALYSIS.md">Roadmap</a> •
-  <a href="https://github.com/YOUR_USERNAME/claude-ai-research-skills/discussions">Community</a>
+  <a href="ROADMAP.md">Roadmap</a> •
+  <!-- <a href="https://github.com/zechenzhangAGI/claude-ai-research-skills/discussions">Community</a> -->
 </p>
 
 <p align="center">
