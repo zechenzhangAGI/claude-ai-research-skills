@@ -298,7 +298,7 @@ Install skill categories directly using the **Claude Code CLI**:
 
 ### 📝 ML Paper Writing (2 skills)
 - **[ML Paper Writing](20-ml-paper-writing/)** - Write publication-ready papers for NeurIPS, ICML, ICLR, ACL, AAAI, COLM with LaTeX templates, citation verification, and writing best practices (532 lines + 5 refs)
-- **[Academic Plotting](20-ml-paper-writing/academic-plotting/)** - Generate publication-quality figures for ML papers: architecture diagrams via Gemini AI and data-driven charts via matplotlib/seaborn with venue-specific styling (479 lines + 3 refs)
+- **[Academic Plotting](20-ml-paper-writing/academic-plotting/)** - Generate publication-quality figures for ML papers: architecture diagrams via AI image generation (default gpt-image-2, switchable to any image-generation model) and data-driven charts via matplotlib/seaborn with venue-specific styling (493 lines + 3 refs)
 
 ### 💡 Ideation (2 skills)
 - **[Research Brainstorming](21-research-ideation/brainstorming-research-ideas/)** - Structured ideation frameworks for discovering high-impact research directions with 10 complementary lenses (384 lines)

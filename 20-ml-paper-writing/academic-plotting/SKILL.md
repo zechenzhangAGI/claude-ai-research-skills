@@ -1,33 +1,33 @@
 ---
 name: academic-plotting
-description: Generates publication-quality figures for ML papers from research context. Given a paper section or description, extracts system components and relationships to generate architecture diagrams via Gemini. Given experiment results or data, auto-selects chart type and generates data-driven figures via matplotlib/seaborn. Use when creating any figure for a conference paper.
-version: 1.0.0
+description: Generates publication-quality figures for ML papers from research context. Given a paper section or description, extracts system components and relationships to generate architecture diagrams via AI image generation (default gpt-image-2, switchable to any image-generation model on OpenRouter or another OpenAI-compatible endpoint). Given experiment results or data, auto-selects chart type and generates data-driven figures via matplotlib/seaborn. Use when creating any figure for a conference paper.
+version: 2.0.0
 author: Orchestra Research
 license: MIT
 tags: [Academic Writing, Visualization, Matplotlib, Seaborn, Plotting, Figures, Diagrams, NeurIPS, ICML, ICLR, LaTeX]
-dependencies: [matplotlib>=3.8.0, seaborn>=0.13.0, numpy, google-genai>=1.0.0]
+dependencies: [matplotlib>=3.8.0, seaborn>=0.13.0, numpy, requests>=2.31.0]
 ---
 
 # Academic Plotting for ML Papers
 
 Generate publication-quality figures for ML/AI conference papers. Two distinct workflows:
 
-1. **Diagram figures** (architecture, system design, workflows, pipelines) — AI image generation via Gemini
+1. **Diagram figures** (architecture, system design, workflows, pipelines) — AI image generation (default: gpt-image-2)
 2. **Data figures** (line charts, bar charts, scatter plots, heatmaps, ablations) — matplotlib/seaborn
 
 ## When to Use Which Workflow
 
 | Figure Type | Tool | Why |
 |-------------|------|-----|
-| Architecture / system diagram | Gemini (Workflow 1) | Complex spatial layouts with boxes, arrows, labels |
-| Workflow / pipeline / lifecycle | Gemini (Workflow 1) | Multi-step processes with connections |
+| Architecture / system diagram | AI image gen (Workflow 1) | Complex spatial layouts with boxes, arrows, labels |
+| Workflow / pipeline / lifecycle | AI image gen (Workflow 1) | Multi-step processes with connections |
 | Bar chart, line plot, scatter | matplotlib (Workflow 2) | Precise numerical data, reproducible |
 | Heatmap, confusion matrix | matplotlib/seaborn (Workflow 2) | Structured grid data |
 | Ablation table as chart | matplotlib (Workflow 2) | Grouped bars or line comparisons |
 | Pie / donut chart | matplotlib (Workflow 2) | Proportional data (use sparingly in ML papers) |
 | Training curves | matplotlib (Workflow 2) | Loss/accuracy over steps/epochs |
 
-**Rule of thumb**: If the figure has numerical axes, use matplotlib. If the figure has boxes and arrows, use Gemini.
+**Rule of thumb**: If the figure has numerical axes, use matplotlib. If the figure has boxes and arrows, use AI image generation.
 
 ---
 
@@ -83,7 +83,7 @@ The user will typically provide one of these inputs — not a ready-made specifi
 ### Auto-Detection Examples
 
 **Context → Diagram**: "Our system has a Planner, Executor, and Verifier. Planner sends plans to Executor, Executor returns results to Verifier, Verifier feeds back to Planner on failure."
-→ 3 entities, cycle layout, dashed feedback arrow → **Workflow 1 (Gemini)**
+→ 3 entities, cycle layout, dashed feedback arrow → **Workflow 1 (AI image gen)**
 
 **Data → Chart**: "GPT-4: MMLU 86.4, HumanEval 67.0. Ours: 88.1, 71.2. Llama-3: 79.3, 62.1."
 → 3 methods × 2 benchmarks → **Workflow 2 (grouped bar)**, highlight "Ours" in coral
@@ -92,7 +92,23 @@ The user will typically provide one of these inputs — not a ready-made specifi
 
 ## Workflow 1: Architecture & System Diagrams (AI Image Generation)
 
-Use Gemini 3 Pro Image Preview to generate diagrams. **Choose a visual style first** — this is the single biggest factor in whether the figure looks professional or generic.
+Generate diagrams with an AI image model — default `openai/gpt-image-2` via OpenRouter, switchable to any image-generation model the user names (see Model & Endpoint Configuration). **Choose a visual style first** — this is the single biggest factor in whether the figure looks professional or generic.
+
+### Model & Endpoint Configuration
+
+The generation script reads three constants (see template below). If the user names a model or endpoint in conversation ("use Gemini", "draw it with Seedream", "use my own gateway"), set them accordingly; otherwise keep the defaults.
+
+| Constant | Default | Notes |
+|----------|---------|-------|
+| `MODEL` | `openai/gpt-image-2` | Any image-generation model on the endpoint, e.g. `google/gemini-3-pro-image-preview` |
+| `API_URL` | `https://openrouter.ai/api/v1/images` | Any OpenAI-compatible image endpoint; for direct OpenAI use `https://api.openai.com/v1/images/generations` |
+| `API_KEY_ENV` | `OPENROUTER_API_KEY` | Env var holding the key for the chosen endpoint (e.g. `OPENAI_API_KEY` for direct OpenAI) |
+
+Usage notes:
+
+- **List available models**: `curl -s "https://openrouter.ai/api/v1/models?output_modalities=image"`
+- **Control dimensions**: add optional payload fields alongside `model`/`prompt` — `size` (e.g. `"2048x2048"`), `aspect_ratio` (e.g. `"16:9"`), `quality` (`low`/`medium`/`high`)
+- **Use OpenAI directly**: set `API_URL = "https://api.openai.com/v1/images/generations"`, `MODEL = "gpt-image-2"`, `API_KEY_ENV = "OPENAI_API_KEY"`
 
 ### Visual Styles
 
@@ -192,14 +208,14 @@ VISUAL STYLE — CLASSIC ACCENT BAR:
 - [ ] **Extract from context**: Read paper/description, identify entities and relationships
 - [ ] **Choose visual style** (A/B/C/D) — match the paper's tone and venue
 - [ ] **Choose color palette** — or use one consistent with existing paper figures
-- [ ] Obtain Gemini API key (`GEMINI_API_KEY` env var)
+- [ ] Confirm model/endpoint config and API key (default: `OPENROUTER_API_KEY` env var)
 - [ ] Write a detailed prompt: style block + layout + connections + constraints
 - [ ] Generate script at `figures/gen_fig_<name>.py`, run for 3 attempts
 - [ ] Review, select best, save as `figures/fig_<name>.png`
 
 ### Prompt Structure (6 Sections)
 
-Every Gemini prompt must include these sections in order:
+Every image-generation prompt must include these sections in order:
 
 ```
 1. FRAMING (5 lines): "Create a [STYLE_NAME]-style technical diagram for a
@@ -224,45 +240,45 @@ Every Gemini prompt must include these sections in order:
 
 ```python
 #!/usr/bin/env python3
-"""Generate [FIGURE_NAME] diagram using Gemini image generation."""
-import os, sys, time
-from google import genai
+"""Generate [FIGURE_NAME] diagram via AI image generation."""
+import base64, os, sys, time
+import requests
 
-API_KEY = os.environ.get("GEMINI_API_KEY")
+# --- Model configuration (edit per user request) ---
+MODEL = "openai/gpt-image-2"                     # any image-gen model on your endpoint
+API_URL = "https://openrouter.ai/api/v1/images"  # any OpenAI-compatible image endpoint
+API_KEY_ENV = "OPENROUTER_API_KEY"               # env var holding the API key
+
+API_KEY = os.environ.get(API_KEY_ENV)
 if not API_KEY:
-    print("ERROR: Set GEMINI_API_KEY environment variable.")
-    print("  Get a key at: https://aistudio.google.com/apikey")
+    print(f"ERROR: Set the {API_KEY_ENV} environment variable (API key for {API_URL}).")
     sys.exit(1)
 
-MODEL = "gemini-3-pro-image-preview"
 OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
-client = genai.Client(api_key=API_KEY)
 
 PROMPT = """
 [PASTE YOUR 6-SECTION PROMPT HERE]
 """
 
 def generate_image(prompt_text, attempt_num):
-    print(f"\n{'='*60}\nAttempt {attempt_num}\n{'='*60}")
+    print(f"\n{'='*60}\nAttempt {attempt_num} — {MODEL}\n{'='*60}")
     try:
-        response = client.models.generate_content(
-            model=MODEL,
-            contents=prompt_text,
-            config=genai.types.GenerateContentConfig(
-                response_modalities=["IMAGE", "TEXT"],
-            ),
+        resp = requests.post(
+            API_URL,
+            headers={"Authorization": f"Bearer {API_KEY}"},
+            json={"model": MODEL, "prompt": prompt_text},
+            timeout=300,
         )
+        resp.raise_for_status()
+        data = resp.json().get("data") or []
+        if not data or not data[0].get("b64_json"):
+            print(f"WARNING: No image in response: {resp.text[:300]}")
+            return None
         output_path = os.path.join(OUTPUT_DIR, f"fig_NAME_attempt{attempt_num}.png")
-        for part in response.candidates[0].content.parts:
-            if part.inline_data:
-                with open(output_path, "wb") as f:
-                    f.write(part.inline_data.data)
-                print(f"Saved: {output_path} ({os.path.getsize(output_path):,} bytes)")
-                return output_path
-            elif part.text:
-                print(f"Text: {part.text[:300]}")
-        print("WARNING: No image in response")
-        return None
+        with open(output_path, "wb") as f:
+            f.write(base64.b64decode(data[0]["b64_json"]))
+        print(f"Saved: {output_path} ({os.path.getsize(output_path):,} bytes)")
+        return output_path
     except Exception as e:
         print(f"ERROR: {e}")
         return None
@@ -287,10 +303,10 @@ if __name__ == "__main__":
 ### Key Rules
 
 - **Always 3 attempts** — quality varies significantly between runs
-- **Style block is mandatory** — without it, Gemini defaults to generic corporate look
-- **Never hardcode API keys** — use `os.environ.get("GEMINI_API_KEY")`
-- **Save generation scripts** — reproducibility is critical
-- **Specify every label exactly** — Gemini may misspell or rearrange text
+- **Style block is mandatory** — without it, image models default to generic corporate look
+- **Never hardcode API keys** — read them from the `API_KEY_ENV` environment variable
+- **Save generation scripts** — reproducibility is critical (including the model config used)
+- **Specify every label exactly** — image models may misspell or rearrange text
 
 **Full prompt examples per style**: See [references/diagram-generation.md](references/diagram-generation.md)
 
@@ -450,8 +466,8 @@ fig.savefig("figures/fig_leaderboard.pdf")
 | Fonts look wrong in LaTeX | Export PDF, set `text.usetex=True`, or use `font.family=serif` |
 | Figure too large for column | Check venue width limits, use `figsize` in inches |
 | Colors indistinguishable in print | Use colorblind-safe palette + different line styles/markers |
-| Gemini misspells labels | Spell out every label exactly in prompt, add "SPELL EXACTLY" constraint |
-| Gemini ignores style | Add more negative constraints, be more specific about hex colors |
+| Model misspells labels | Spell out every label exactly in prompt, add "SPELL EXACTLY" constraint |
+| Model ignores style | Add more negative constraints, be more specific about hex colors |
 | Blurry figures in PDF | Export as PDF (vector), not PNG; or use 300+ DPI for PNG |
 | Legend overlaps data | Use `bbox_to_anchor`, `loc="upper left"`, or external legend |
 | Too many tick labels | Use `ax.xaxis.set_major_locator(MaxNLocator(5))` |
@@ -460,10 +476,10 @@ fig.savefig("figures/fig_leaderboard.pdf")
 
 | Need | This Skill | Alternative |
 |------|-----------|-------------|
-| Architecture diagrams | Gemini generation | TikZ (manual), draw.io (interactive), Mermaid (simple) |
+| Architecture diagrams | AI image generation | TikZ (manual), draw.io (interactive), Mermaid (simple) |
 | Data charts | matplotlib/seaborn | Plotly (interactive), R/ggplot2 (statistics-heavy) |
-| Full paper writing | Use with `ml-paper-writing` | — |
-| Poster figures | Larger fonts, wider | `latex-posters` skill |
+| Full paper writing | Use with `ml-paper-writing` or `systems-paper-writing` | — |
+| Poster figures | Larger fonts, wider | `beamerposter` / `tikzposter` (LaTeX packages) |
 | Presentation figures | Larger text, fewer details | PowerPoint/Keynote export |
 
 ---
@@ -475,5 +491,5 @@ figures/
 ├── gen_fig_<name>.py      # Generation script (always save for reproducibility)
 ├── fig_<name>.pdf         # Final vector output (for LaTeX)
 ├── fig_<name>.png         # Raster output (300 DPI, for AI-generated or fallback)
-└── fig_<name>_attempt*.png # Gemini attempts (keep for comparison)
+└── fig_<name>_attempt*.png # generation attempts (keep for comparison)
 ```
