@@ -4,7 +4,7 @@ Complete prompt engineering reference for generating distinctive, publication-qu
 
 ## Why Prompts Matter More Than Anything
 
-The same Gemini model produces wildly different results depending on prompt quality:
+The same image-generation model produces wildly different results depending on prompt quality:
 - **Generic prompt** → boring corporate flowchart with random colors
 - **Style-specific prompt** → distinctive, memorable figure with consistent visual identity
 
@@ -12,10 +12,12 @@ The style block at the top of your prompt is the single most important factor.
 
 ## Model Selection
 
-| Model | Best For | Notes |
-|-------|----------|-------|
-| `gemini-3-pro-image-preview` | All technical diagrams | Best text rendering, highest structural fidelity |
-| DALL-E 3 | Conceptual illustrations | Better aesthetics, worse at precise text placement |
+The default endpoint is OpenRouter (`https://openrouter.ai/api/v1/images`), so any image-generation model it hosts can be used by name. Recommended models:
+
+| Model | Notes |
+|-------|-------|
+| `openai/gpt-image-2` (default) | Best text rendering; arbitrary resolutions (w/h multiples of 16, edge ≤3840px, aspect ≤3:1); no transparent backgrounds |
+| `google/gemini-3-pro-image-preview` | High structural fidelity, strong at dense layouts |
 
 ## Prompt Architecture (6 Sections)
 
@@ -382,7 +384,7 @@ Use when the diagram is simple enough for deterministic output:
 
 ## Mermaid for Quick Prototyping
 
-Sketch the logical flow before investing in Gemini generation:
+Sketch the logical flow before investing in image generation:
 
 ```mermaid
 graph LR
@@ -391,4 +393,4 @@ graph LR
     C -.->|refine| A
 ```
 
-Validate the structure is correct, then write the full Gemini prompt.
+Validate the structure is correct, then write the full image-generation prompt.
