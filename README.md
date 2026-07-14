@@ -13,6 +13,7 @@
   <a href="https://join.slack.com/t/orchestrarese-efu1990/shared_invite/zt-3iu6gr8io-zJvpkZTPToEviQ9KFZvNSg"><img src="https://img.shields.io/badge/Slack-Join%20Community-4A154B.svg?logo=slack" alt="Slack"></a>
   <a href="https://x.com/orch_research"><img src="https://img.shields.io/badge/Twitter-Follow-1DA1F2.svg?logo=x" alt="Twitter"></a>
   <a href="https://www.linkedin.com/company/orchestra-research/"><img src="https://img.shields.io/badge/LinkedIn-Follow-0A66C2.svg?logo=linkedin" alt="LinkedIn"></a>
+  <img src="https://img.shields.io/endpoint?url=https://gittokens.rsamf.com/badge/Orchestra-Research/AI-Research-SKILLs" alt="tokens">
 </p>
 
 <div align="center">
