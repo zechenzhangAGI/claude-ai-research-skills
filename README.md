@@ -28,12 +28,12 @@
 
 | | | |
 |:---:|:---:|:---:|
-| **Autoresearch** (1) | **Ideation** (2) | **ML Paper Writing** (2) |
+| **Autoresearch** (1) | **Ideation** (2) | **ML Paper Writing** (4) |
 | **Model Architecture** (5) | **Fine-Tuning** (4) | **Post-Training** (8) |
-| **Distributed Training** (6) | **Optimization** (6) | **Inference** (4) |
+| **Distributed Training** (6) | **Optimization** (7) | **Inference** (4) |
 | **Tokenization** (2) | **Data Processing** (2) | **Evaluation** (3) |
-| **Safety & Alignment** (4) | **Agents** (4) | **RAG** (5) |
-| **Multimodal** (7) | **Prompt Engineering** (4) | **MLOps** (3) |
+| **Safety & Alignment** (4) | **Agents** (5) | **RAG** (5) |
+| **Multimodal** (10) | **Prompt Engineering** (4) | **MLOps** (4) |
 | **Observability** (2) | **Infrastructure** (3) | **Mech Interp** (4) |
 | **Emerging Techniques** (6) | **Agent-Native Research Artifact** (3) | |
 
@@ -147,7 +147,7 @@ Install skill categories directly using the **Claude Code CLI**:
 |----------|--------|----------|
 | **Autoresearch** | **1** | **Autonomous research orchestration — central layer that manages the full lifecycle and routes to all other skills** |
 | Ideation | 2 | Research Brainstorming, Creative Thinking |
-| ML Paper Writing | 2 | ML Paper Writing (LaTeX templates, citation verification), Academic Plotting |
+| ML Paper Writing | 4 | ML Paper Writing (LaTeX templates, citation verification), Systems Paper Writing, Academic Plotting, Presenting Conference Talks |
 | Model Architecture | 5 | LitGPT, Mamba, NanoGPT, RWKV, TorchTitan |
 | Tokenization | 2 | HuggingFace Tokenizers, SentencePiece |
 | Fine-Tuning | 4 | Axolotl, LLaMA-Factory, PEFT, Unsloth |
@@ -157,15 +157,15 @@ Install skill categories directly using the **Claude Code CLI**:
 | Safety | 4 | Constitutional AI, LlamaGuard, NeMo Guardrails, Prompt Guard |
 | Distributed | 6 | DeepSpeed, FSDP, Accelerate, Megatron-Core, Lightning, Ray Train |
 | Infrastructure | 3 | Modal, Lambda Labs, SkyPilot |
-| Optimization | 6 | Flash Attention, bitsandbytes, GPTQ, AWQ, HQQ, GGUF |
+| Optimization | 7 | Flash Attention, bitsandbytes, GPTQ, AWQ, HQQ, GGUF, ML Training Recipes |
 | Evaluation | 3 | lm-eval-harness, BigCode, NeMo Evaluator |
 | Inference | 4 | vLLM, TensorRT-LLM, llama.cpp, SGLang |
-| MLOps | 3 | W&B, MLflow, TensorBoard |
-| Agents | 4 | LangChain, LlamaIndex, CrewAI, AutoGPT |
+| MLOps | 4 | W&B, MLflow, TensorBoard, SwanLab |
+| Agents | 5 | LangChain, LlamaIndex, CrewAI, AutoGPT, A-Evolve |
 | RAG | 5 | Chroma, FAISS, Pinecone, Qdrant, Sentence Transformers |
 | Prompt Eng | 4 | DSPy, Instructor, Guidance, Outlines |
 | Observability | 2 | LangSmith, Phoenix |
-| Multimodal | 7 | CLIP, Whisper, LLaVA, BLIP-2, SAM, Stable Diffusion, AudioCraft |
+| Multimodal | 10 | CLIP, Whisper, LLaVA, BLIP-2, SAM, Stable Diffusion, AudioCraft, Cosmos Policy, OpenPI, OpenVLA-OFT |
 | Emerging | 6 | MoE, Model Merging, Long Context, Speculative Decoding, Distillation, Pruning |
 | Agent-Native Research Artifact | 3 | ARA Compiler, Research Manager, Rigor Reviewer |
 
@@ -227,13 +227,14 @@ Install skill categories directly using the **Claude Code CLI**:
 - **[PyTorch Lightning](08-distributed-training/pytorch-lightning/)** - High-level training framework with Trainer class (339 lines + 3 refs)
 - **[Ray Train](08-distributed-training/ray-train/)** - Multi-node orchestration and hyperparameter tuning (399 lines + 1 ref)
 
-### 🚀 Optimization (6 skills)
+### 🚀 Optimization (7 skills)
 - **[Flash Attention](10-optimization/flash-attention/)** - 2-4x faster attention with memory efficiency (359 lines + 2 refs)
 - **[bitsandbytes](10-optimization/bitsandbytes/)** - 8-bit/4-bit quantization for 50-75% memory reduction (403 lines + 3 refs)
 - **[GPTQ](10-optimization/gptq/)** - 4-bit post-training quantization, 4× memory reduction, <2% accuracy loss (443 lines + 3 refs)
 - **[AWQ](10-optimization/awq/)** - Activation-aware weight quantization, 4-bit with minimal accuracy loss (310 lines + 2 refs)
 - **[HQQ](10-optimization/hqq/)** - Half-Quadratic Quantization, no calibration data needed, multi-backend (370 lines + 2 refs)
 - **[GGUF](10-optimization/gguf/)** - llama.cpp quantization format, K-quant methods, CPU/Metal inference (380 lines + 2 refs)
+- **[ML Training Recipes](10-optimization/ml-training-recipes/)** - Battle-tested PyTorch training recipes across LLMs, vision, diffusion, and biomedical domains, covering training loops, optimizers, scheduling, mixed precision, and debugging (319 lines + 6 refs)
 
 ### 📊 Evaluation (3 skills)
 - **[lm-evaluation-harness](11-evaluation/lm-evaluation-harness/)** - EleutherAI's standard for benchmarking LLMs across 60+ tasks (482 lines + 4 refs)
@@ -251,11 +252,12 @@ Install skill categories directly using the **Claude Code CLI**:
 - **[llama.cpp](12-inference-serving/llama-cpp/)** - CPU/Apple Silicon inference, GGUF quantization (251 lines + 3 refs)
 - **[SGLang](12-inference-serving/sglang/)** - Structured generation with RadixAttention, 5-10× faster for agents (435 lines + 3 refs)
 
-### 🤖 Agents (4 skills)
+### 🤖 Agents (5 skills)
 - **[LangChain](14-agents/langchain/)** - Most popular agent framework, 500+ integrations, ReAct pattern (658 lines + 3 refs, **production-ready**)
 - **[LlamaIndex](14-agents/llamaindex/)** - Data framework for LLM apps, 300+ connectors, RAG-focused (535 lines + 3 refs)
 - **[CrewAI](14-agents/crewai/)** - Multi-agent orchestration, role-based collaboration, autonomous workflows (498 lines + 3 refs)
 - **[AutoGPT](14-agents/autogpt/)** - Autonomous AI agent platform, visual workflow builder, continuous execution (400 lines + 2 refs)
+- **[A-Evolve](14-agents/a-evolve/)** - Automatically evolve and optimize AI agents with LLM-driven evolution, benchmark evaluation, and skill discovery (383 lines + 8 refs)
 
 ### 🔍 RAG (5 skills)
 - **[Chroma](15-rag/chroma/)** - Open-source embedding database, local/cloud, 24k stars (385 lines + 1 ref)
@@ -264,7 +266,7 @@ Install skill categories directly using the **Claude Code CLI**:
 - **[Pinecone](15-rag/pinecone/)** - Managed vector database, auto-scaling, <100ms latency (410 lines)
 - **[Qdrant](15-rag/qdrant/)** - High-performance vector search, Rust-powered, hybrid search with filtering (493 lines + 2 refs)
 
-### 🎨 Multimodal (7 skills)
+### 🎨 Multimodal (10 skills)
 - **[CLIP](18-multimodal/clip/)** - OpenAI's vision-language model, zero-shot classification, 25k stars (320 lines)
 - **[Whisper](18-multimodal/whisper/)** - Robust speech recognition, 99 languages, 73k stars (395 lines)
 - **[LLaVA](18-multimodal/llava/)** - Vision-language assistant, image chat, GPT-4V level (360 lines)
@@ -272,6 +274,9 @@ Install skill categories directly using the **Claude Code CLI**:
 - **[Segment Anything](18-multimodal/segment-anything/)** - Meta's SAM for zero-shot image segmentation with points/boxes (500 lines + 2 refs)
 - **[BLIP-2](18-multimodal/blip-2/)** - Vision-language pretraining with Q-Former, image captioning, VQA (500 lines + 2 refs)
 - **[AudioCraft](18-multimodal/audiocraft/)** - Meta's MusicGen/AudioGen for text-to-music and text-to-sound (470 lines + 2 refs)
+- **[Cosmos Policy](18-multimodal/cosmos-policy/)** - Evaluate NVIDIA Cosmos Policy on LIBERO and RoboCasa with headless GPU simulation and inference profiling (402 lines + 2 refs)
+- **[OpenPI](18-multimodal/openpi/)** - Fine-tune and serve Physical Intelligence pi0, pi0-fast, and pi0.5 robot policies with JAX or PyTorch across ALOHA, DROID, and LIBERO (480 lines + 5 refs)
+- **[OpenVLA-OFT](18-multimodal/openvla-oft/)** - Fine-tune and evaluate OpenVLA-OFT policies with continuous action heads, LoRA, and FiLM on LIBERO and ALOHA (441 lines + 4 refs)
 
 ### 🎯 Prompt Engineering (4 skills)
 - **[DSPy](16-prompt-engineering/dspy/)** - Declarative prompt programming with optimizers, Stanford NLP, 22k stars (438 lines + 3 refs)
@@ -279,10 +284,11 @@ Install skill categories directly using the **Claude Code CLI**:
 - **[Guidance](16-prompt-engineering/guidance/)** - Constrained generation with regex/grammars, Microsoft Research, 18k stars (485 lines + 3 refs)
 - **[Outlines](16-prompt-engineering/outlines/)** - Structured text with FSM, zero-overhead, 8k stars (601 lines + 3 refs)
 
-### 📊 MLOps (3 skills)
+### 📊 MLOps (4 skills)
 - **[Weights & Biases](13-mlops/weights-and-biases/)** - Experiment tracking, sweeps, artifacts, model registry (427 lines + 3 refs)
 - **[MLflow](13-mlops/mlflow/)** - Model registry, tracking, deployment, autologging (514 lines + 3 refs)
 - **[TensorBoard](13-mlops/tensorboard/)** - Visualization, profiling, embeddings, scalars/images (538 lines + 3 refs)
+- **[SwanLab](13-mlops/swanlab/)** - Open-source experiment tracking with local or self-hosted dashboards and lightweight media logging for ML workflows (406 lines + 2 refs)
 
 ### 👁️ Observability (2 skills)
 - **[LangSmith](17-observability/langsmith/)** - LLM observability, tracing, evaluation, monitoring for AI apps (422 lines + 2 refs)
@@ -296,9 +302,11 @@ Install skill categories directly using the **Claude Code CLI**:
 - **[Knowledge Distillation](19-emerging-techniques/knowledge-distillation/)** - Compress models 70B→7B with MiniLLM, temperature scaling (424 lines)
 - **[Model Pruning](19-emerging-techniques/model-pruning/)** - 50% sparsity with Wanda, SparseGPT, <1% accuracy loss (417 lines)
 
-### 📝 ML Paper Writing (2 skills)
-- **[ML Paper Writing](20-ml-paper-writing/)** - Write publication-ready papers for NeurIPS, ICML, ICLR, ACL, AAAI, COLM with LaTeX templates, citation verification, and writing best practices (532 lines + 5 refs)
+### 📝 ML Paper Writing (4 skills)
+- **[ML Paper Writing](20-ml-paper-writing/ml-paper-writing/)** - Write publication-ready papers for NeurIPS, ICML, ICLR, ACL, AAAI, COLM with LaTeX templates, citation verification, and writing best practices (982 lines + 5 refs)
+- **[Systems Paper Writing](20-ml-paper-writing/systems-paper-writing/)** - Write systems papers for OSDI, SOSP, ASPLOS, NSDI, and EuroSys with paragraph-level blueprints, venue-specific writing patterns, reviewer guidance, and LaTeX templates (270 lines + 5 refs)
 - **[Academic Plotting](20-ml-paper-writing/academic-plotting/)** - Generate publication-quality figures for ML papers: architecture diagrams via Gemini AI and data-driven charts via matplotlib/seaborn with venue-specific styling (479 lines + 3 refs)
+- **[Presenting Conference Talks](20-ml-paper-writing/presenting-conference-talks/)** - Turn compiled papers into conference presentations with Beamer PDF and editable PPTX outputs, speaker notes, and optional talk scripts (298 lines + 1 ref)
 
 ### 💡 Ideation (2 skills)
 - **[Research Brainstorming](21-research-ideation/brainstorming-research-ideas/)** - Structured ideation frameworks for discovering high-impact research directions with 10 complementary lenses (384 lines)
@@ -378,7 +386,7 @@ The library spans 98 comprehensive skills across the full AI research lifecycle.
 
 | Metric | Current | Target |
 |--------|---------|--------|
-| **Skills** | **87** (high-quality, standardized YAML) | 80 ✅ |
+| **Skills** | **98** (high-quality, standardized YAML) | 80 ✅ |
 | **Avg Lines/Skill** | **420 lines** (focused + progressive disclosure) | 200-600 lines |
 | **Documentation** | **~130,000 lines** total (SKILL.md + references) | 100,000+ lines |
 | **Gold Standard Skills** | **65** with comprehensive references | 50+ |
@@ -411,17 +419,17 @@ claude-ai-research-skills/
 ├── 07-safety-alignment/         (4 skills ✓ - Constitutional AI, LlamaGuard, NeMo Guardrails, Prompt Guard)
 ├── 08-distributed-training/     (6 skills ✓ - Megatron-Core, DeepSpeed, FSDP, Accelerate, Lightning, Ray Train)
 ├── 09-infrastructure/           (3 skills ✓ - Modal, SkyPilot, Lambda Labs)
-├── 10-optimization/             (6 skills ✓ - Flash Attention, bitsandbytes, GPTQ, AWQ, HQQ, GGUF)
+├── 10-optimization/             (7 skills ✓ - Flash Attention, bitsandbytes, GPTQ, AWQ, HQQ, GGUF, ML Training Recipes)
 ├── 11-evaluation/               (3 skills ✓ - lm-evaluation-harness, BigCode, NeMo Evaluator)
 ├── 12-inference-serving/        (4 skills ✓ - vLLM, TensorRT-LLM, llama.cpp, SGLang)
-├── 13-mlops/                    (3 skills ✓ - Weights & Biases, MLflow, TensorBoard)
-├── 14-agents/                   (4 skills ✓ - LangChain, LlamaIndex, CrewAI, AutoGPT)
+├── 13-mlops/                    (4 skills ✓ - Weights & Biases, MLflow, TensorBoard, SwanLab)
+├── 14-agents/                   (5 skills ✓ - LangChain, LlamaIndex, CrewAI, AutoGPT, A-Evolve)
 ├── 15-rag/                      (5 skills ✓ - Chroma, FAISS, Sentence Transformers, Pinecone, Qdrant)
 ├── 16-prompt-engineering/       (4 skills ✓ - DSPy, Instructor, Guidance, Outlines)
 ├── 17-observability/            (2 skills ✓ - LangSmith, Phoenix)
-├── 18-multimodal/               (7 skills ✓ - CLIP, Whisper, LLaVA, Stable Diffusion, SAM, BLIP-2, AudioCraft)
+├── 18-multimodal/               (10 skills ✓ - CLIP, Whisper, LLaVA, Stable Diffusion, SAM, BLIP-2, AudioCraft, Cosmos Policy, OpenPI, OpenVLA-OFT)
 ├── 19-emerging-techniques/      (6 skills ✓ - MoE, Model Merging, Long Context, Speculative Decoding, Distillation, Pruning)
-├── 20-ml-paper-writing/         (2 skills ✓ - ML Paper Writing with LaTeX templates, Academic Plotting)
+├── 20-ml-paper-writing/         (4 skills ✓ - ML Paper Writing, Systems Paper Writing, Academic Plotting, Presenting Conference Talks)
 ├── 21-research-ideation/           (2 skills ✓ - Research Brainstorming, Creative Thinking)
 ├── 22-agent-native-research-artifact/ (3 skills ✓ - ARA Compiler, Research Manager, Rigor Reviewer)
 └── packages/ai-research-skills/ (npm package for one-command installation)
