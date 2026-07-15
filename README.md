@@ -28,7 +28,7 @@
 
 | | | |
 |:---:|:---:|:---:|
-| **Autoresearch** (1) | **Ideation** (2) | **ML Paper Writing** (2) |
+| **Autoresearch** (1) | **Ideation** (2) | **ML Paper Writing** (4) |
 | **Model Architecture** (5) | **Fine-Tuning** (4) | **Post-Training** (8) |
 | **Distributed Training** (6) | **Optimization** (6) | **Inference** (4) |
 | **Tokenization** (2) | **Data Processing** (2) | **Evaluation** (3) |
@@ -147,7 +147,7 @@ Install skill categories directly using the **Claude Code CLI**:
 |----------|--------|----------|
 | **Autoresearch** | **1** | **Autonomous research orchestration — central layer that manages the full lifecycle and routes to all other skills** |
 | Ideation | 2 | Research Brainstorming, Creative Thinking |
-| ML Paper Writing | 2 | ML Paper Writing (LaTeX templates, citation verification), Academic Plotting |
+| ML Paper Writing | 4 | ML Paper Writing (LaTeX templates, citation verification), Systems Paper Writing, Academic Plotting, Presenting Conference Talks |
 | Model Architecture | 5 | LitGPT, Mamba, NanoGPT, RWKV, TorchTitan |
 | Tokenization | 2 | HuggingFace Tokenizers, SentencePiece |
 | Fine-Tuning | 4 | Axolotl, LLaMA-Factory, PEFT, Unsloth |
@@ -296,9 +296,11 @@ Install skill categories directly using the **Claude Code CLI**:
 - **[Knowledge Distillation](19-emerging-techniques/knowledge-distillation/)** - Compress models 70B→7B with MiniLLM, temperature scaling (424 lines)
 - **[Model Pruning](19-emerging-techniques/model-pruning/)** - 50% sparsity with Wanda, SparseGPT, <1% accuracy loss (417 lines)
 
-### 📝 ML Paper Writing (2 skills)
-- **[ML Paper Writing](20-ml-paper-writing/)** - Write publication-ready papers for NeurIPS, ICML, ICLR, ACL, AAAI, COLM with LaTeX templates, citation verification, and writing best practices (532 lines + 5 refs)
+### 📝 ML Paper Writing (4 skills)
+- **[ML Paper Writing](20-ml-paper-writing/ml-paper-writing/)** - Write publication-ready papers for NeurIPS, ICML, ICLR, ACL, AAAI, COLM with LaTeX templates, citation verification, and writing best practices (982 lines + 5 refs)
+- **[Systems Paper Writing](20-ml-paper-writing/systems-paper-writing/)** - Write systems papers for OSDI, SOSP, ASPLOS, NSDI, and EuroSys with paragraph-level blueprints, venue-specific writing patterns, reviewer guidance, and LaTeX templates (270 lines + 5 refs)
 - **[Academic Plotting](20-ml-paper-writing/academic-plotting/)** - Generate publication-quality figures for ML papers: architecture diagrams via Gemini AI and data-driven charts via matplotlib/seaborn with venue-specific styling (479 lines + 3 refs)
+- **[Presenting Conference Talks](20-ml-paper-writing/presenting-conference-talks/)** - Turn compiled papers into conference presentations with Beamer PDF and editable PPTX outputs, speaker notes, and optional talk scripts (298 lines + 1 ref)
 
 ### 💡 Ideation (2 skills)
 - **[Research Brainstorming](21-research-ideation/brainstorming-research-ideas/)** - Structured ideation frameworks for discovering high-impact research directions with 10 complementary lenses (384 lines)
@@ -421,7 +423,7 @@ claude-ai-research-skills/
 ├── 17-observability/            (2 skills ✓ - LangSmith, Phoenix)
 ├── 18-multimodal/               (7 skills ✓ - CLIP, Whisper, LLaVA, Stable Diffusion, SAM, BLIP-2, AudioCraft)
 ├── 19-emerging-techniques/      (6 skills ✓ - MoE, Model Merging, Long Context, Speculative Decoding, Distillation, Pruning)
-├── 20-ml-paper-writing/         (2 skills ✓ - ML Paper Writing with LaTeX templates, Academic Plotting)
+├── 20-ml-paper-writing/         (4 skills ✓ - ML Paper Writing, Systems Paper Writing, Academic Plotting, Presenting Conference Talks)
 ├── 21-research-ideation/           (2 skills ✓ - Research Brainstorming, Creative Thinking)
 ├── 22-agent-native-research-artifact/ (3 skills ✓ - ARA Compiler, Research Manager, Rigor Reviewer)
 └── packages/ai-research-skills/ (npm package for one-command installation)
