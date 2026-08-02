@@ -17,6 +17,12 @@ Write a one-page active capsule before drafting:
 | Approximations | Search, truncation, relaxation, temperature, or estimator choices |
 | Open decisions | Items that can still change |
 
+This capsule is an author-internal reasoning aid.  Do not copy local paths,
+worktree names, branch names, temporary run identifiers, or version-control
+hashes into the manuscript.  A paper should state the scientific method and
+reproducibility fields; public release identifiers belong in the artifact
+documentation when they become stable.
+
 Keep historical variants outside the default writing path. Consult them only
 to motivate an ablation or explain provenance; do not let nearby filenames
 silently redefine the current method.
