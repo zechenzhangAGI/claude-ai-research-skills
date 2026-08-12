@@ -1,6 +1,6 @@
-import { existsSync, mkdirSync, symlinkSync, readdirSync, readFileSync, writeFileSync, rmSync, lstatSync, cpSync } from 'fs';
+import { existsSync, mkdirSync, symlinkSync, readdirSync, readFileSync, writeFileSync, rmSync, lstatSync, realpathSync, cpSync } from 'fs';
 import { homedir } from 'os';
-import { join, basename, dirname } from 'path';
+import { join, basename, dirname, isAbsolute, relative, sep } from 'path';
 import { execSync } from 'child_process';
 import chalk from 'chalk';
 import ora from 'ora';
@@ -506,7 +506,15 @@ export async function uninstallAllSkills(agents) {
           // Only remove if it's a symlink pointing to our canonical dir
           try {
             const stats = lstatSync(linkPath);
-            if (stats.isSymbolicLink()) {
+            if (!stats.isSymbolicLink()) continue;
+
+            const relativeTarget = relative(CANONICAL_DIR, realpathSync(linkPath));
+            const isCanonicalTarget = (
+              relativeTarget === '' ||
+              (!relativeTarget.startsWith(`..${sep}`) && relativeTarget !== '..' && !isAbsolute(relativeTarget))
+            );
+
+            if (isCanonicalTarget) {
               rmSync(linkPath, { force: true });
             }
           } catch {
